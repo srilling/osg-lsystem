@@ -1,0 +1,15 @@
+{
+	"name" : "Test",
+	"parameters" : 
+	{
+		"thicknes" : 0.1
+	},
+	"variables" : ["T", "L"],
+	"constants" : ["t", "l"],
+	"axiom" : "t(1.0, 0.0, 0.0, 0.0)T",
+	"rules" :
+		[
+			"T = [t(1.0, 0.0, 0.0, 45.0)] [t(1.0, 0.0, 0.0, -45.0)]"
+		]
+	
+}
