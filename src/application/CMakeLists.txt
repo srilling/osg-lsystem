@@ -9,7 +9,7 @@ add_executable(LSystemDemonstrator ${L_SYSTEM_APP_HEADER} ${L_SYSTEM_APP_SRC})
 
 set(CMAKE_DEBUG_POSTFIX "d")
 
-target_link_libraries(STLProcessingDemonstrator
+target_link_libraries(LSystemDemonstrator
 		debug osg${CMAKE_DEBUG_POSTFIX} optimized osg
 		debug osgDB${CMAKE_DEBUG_POSTFIX} optimized osgDB
 		debug osgViewer${CMAKE_DEBUG_POSTFIX} optimized osgViewer
@@ -18,8 +18,5 @@ target_link_libraries(STLProcessingDemonstrator
 		debug osgUtil${CMAKE_DEBUG_POSTFIX} optimized osgUtil
 		debug osgVolume${CMAKE_DEBUG_POSTFIX} optimized osgVolume
 		debug osgManipulator${CMAKE_DEBUG_POSTFIX} optimized osgManipulator
-		debug OpenThreads${CMAKE_DEBUG_POSTFIX} optimized OpenThreads
-		
-		debug STLProcessing optimized STLProcessing
-				
+		debug OpenThreads${CMAKE_DEBUG_POSTFIX} optimized OpenThreads			
 	)
