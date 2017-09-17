@@ -24,6 +24,9 @@ class LSystem{
 		std::string m_axiom;
 		std::map<std::string, std::string> m_rules;
 
+		unsigned int m_numIterations;
+		std::string m_lSysWord;
+
 	//------------MEMBER FUNCTIONS--------------------------
 	private:
 		void loadLSystemFromJsonFile(std::string const &filename);
@@ -37,12 +40,20 @@ class LSystem{
 
 		void init(void);
 
+		bool isVariable(std::string const &token);
+		bool isConstant(std::string const &token);
+		
+
 	public:
 		std::string const & getName(void) const const {return m_name;}
 		std::vector<std::string> const &getVariables(void) const{return m_variables;}
 		std::vector<std::string> const &getConstants(void) const{return m_constants;}
 		std::string const & getAxiom(void) const {return m_axiom;}
 		std::map<std::string, std::string> const & getRules(void) const { return m_rules;}
+
+		void generate(unsigned int numIterations);
+
+		std::string const & getGeneratedWord(void) const {return m_lSysWord;}
 };
 
 

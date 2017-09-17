@@ -14,6 +14,10 @@ int main(int argc, char **argv){
 	LSystem lSystem("./test.json");
 
 	std::cout<<lSystem<<std::endl;
+
+	lSystem.generate(2);
+
+	std::cout<<"SIE FAUCHT: "<<lSystem.getGeneratedWord()<<std::endl;
 	
 	return 0;
 
