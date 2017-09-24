@@ -7,11 +7,27 @@
 
 #include "../JsonCpp/json/json.h"
 
+
+
+class LSystemToken{
+	
+	public:
+		std::string tokenType;
+		std::vector<float> quaternion; ///x, y, z, w
+
+		float quaternionX(void){return quaternion[0];}
+		float quaternionY(void){return quaternion[1];}
+		float quaternionZ(void){return quaternion[2];}
+		float quaternionW(void){return quaternion[3];}
+
+
+};
+
 class LSystem{
 
 	//------------CONSTRUCTORS & DESTRUCTOR-----------------
 	public:
-		LSystem(std::string const &filename);
+		LSystem(std::string const &filename, unsigned int numIterations = 1);
 		~LSystem(void);
 
 	//------------MEMBER VARIABLES--------------------------
@@ -27,6 +43,7 @@ class LSystem{
 		unsigned int m_numIterations;
 		std::string m_lSysWord;
 
+		std::vector<LSystemToken> m_lSysWordTokens;
 	//------------MEMBER FUNCTIONS--------------------------
 	private:
 		void loadLSystemFromJsonFile(std::string const &filename);
@@ -42,6 +59,8 @@ class LSystem{
 
 		bool isVariable(std::string const &token);
 		bool isConstant(std::string const &token);
+
+		void createTokensFromLSysWord(void);
 		
 
 	public:
@@ -51,9 +70,15 @@ class LSystem{
 		std::string const & getAxiom(void) const {return m_axiom;}
 		std::map<std::string, std::string> const & getRules(void) const { return m_rules;}
 
+		void generate(void);
 		void generate(unsigned int numIterations);
 
 		std::string const & getGeneratedWord(void) const {return m_lSysWord;}
+
+		std::vector<LSystemToken> const & getGeneratedWordTokens(void) const {return m_lSysWordTokens;}
+
+		void setNumIterations(unsigned int nIt){m_numIterations = nIt;}
+		unsigned int getNumIterations(void){return m_numIterations;}
 };
 
 

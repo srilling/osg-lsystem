@@ -25,13 +25,15 @@ int main(int argc, char **argv){
 
 	lSystem.generate(10);
 
+	std::cout<<lSystem.getGeneratedWord()<<std::endl;
+
 	osg::ref_ptr<osg::Group> rootNode = new osg::Group();
 	viewer.setSceneData(rootNode);
 
 
 	LSystemRenderer lSystemRenderer(lSystem, rootNode);
 
-	
+	lSystemRenderer.createPlantModel();
 	
 	
 	return viewer.run();

@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <iterator>
 
-LSystem::LSystem(std::string const &filename) : m_numIterations(0)
+LSystem::LSystem(std::string const &filename, unsigned int numIterations) : m_numIterations(numIterations)
 {
 	try{
 		loadLSystemFromJsonFile(filename);
@@ -35,9 +35,17 @@ void LSystem::init(void){
 
 
 void LSystem::generate(unsigned int numIterations){
+	m_numIterations = numIterations;
+
+	generate();
+
+}
+
+
+void LSystem::generate(void){
 	m_lSysWord = m_axiom;
 
-	for(unsigned int i=0; i<numIterations; i++){
+	for(unsigned int i=0; i<m_numIterations; i++){
 		std::string res = "";
 
 		std::istringstream iss(m_lSysWord);
@@ -62,6 +70,30 @@ void LSystem::generate(unsigned int numIterations){
 		m_lSysWord = res;
 	}
 
+	createTokensFromLSysWord();
+}
+
+
+void LSystem::createTokensFromLSysWord(void){
+	m_lSysWordTokens.clear();
+
+	std::vector<std::string> tokens;
+	std::istringstream iss(m_lSysWord);
+	std::copy(std::istream_iterator<std::string>(iss), std::istream_iterator<std::string>(), std::back_inserter(tokens));
+
+	for(auto tIt = tokens.begin(); tIt != tokens.end(); tIt++){
+		std::string tt = (*tIt).substr(0, 1);
+		if(isConstant(tt)){
+			//DEBUG
+			std::cout<<"SIE FAUCHT "<<tt<<std::endl;
+
+			LSystemToken tok;
+			tok.tokenType = tt;
+
+			m_lSysWordTokens.push_back(tok);
+		}
+	}
+	
 }
 
 
