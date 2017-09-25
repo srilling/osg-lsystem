@@ -84,8 +84,20 @@ void LSystem::createTokensFromLSysWord(void){
 	for(auto tIt = tokens.begin(); tIt != tokens.end(); tIt++){
 		std::string tt = (*tIt).substr(0, 1);
 		if(isConstant(tt)){
+			
+
+			size_t paraStart = tIt->find('(');
+			size_t paraEnd = tIt->find(')');
+
+			std::string params = tIt->substr(paraStart + 1, paraEnd - 2);
+			std::replace(params.begin(), params.end(), ',', ' ');
+			
 			//DEBUG
-			std::cout<<"SIE FAUCHT "<<tt<<std::endl;
+			std::cout<<"SIE FAUCHT "<<*tIt<<"\t"<<params<<std::endl;
+
+			std::vector<std::string> paramTokens;
+			std::istringstream iss(params);
+			std::copy(std::istream_iterator<std::string>(iss), std::istream_iterator<std::string>(), std::back_inserter(paramTokens));
 
 			LSystemToken tok;
 			tok.tokenType = tt;
